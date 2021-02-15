@@ -2,7 +2,7 @@
 
 <launch>
 
-  <group ns="">
+  <group >
   <!-- Load current navsat parameters -->
   <rosparam command="load" file="$(find outdoor_waypoint_nav)/params/navsat_params.yaml" />
 

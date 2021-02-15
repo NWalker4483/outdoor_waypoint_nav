@@ -2,7 +2,7 @@
 
 <launch>
 
-	<node ns="" pkg="outdoor_waypoint_nav" type="gps_waypoint" name="gps_waypoint" output="screen" />
+	<node  pkg="outdoor_waypoint_nav" type="gps_waypoint" name="gps_waypoint" output="screen" />
 		<param name="/coordinates_file" value="/waypoint_files/points_outdoor.txt" type="string" />
 			
 </launch>

@@ -13,7 +13,7 @@
 	<arg name="coordinates_file_dir" value="/waypoint_files/points_outdoor.txt" />
 
 	<!-- Run collect_gps_waypoints node -->
-	<node ns="" pkg="outdoor_waypoint_nav" type="collect_gps_waypoints" name="collect_gps_waypoints" output="screen" />
+	<node pkg="outdoor_waypoint_nav" type="collect_gps_waypoints" name="collect_gps_waypoints" output="screen" />
 	<!-- WARNING: This will replace any file in this directory with the same name.-->
 	<param name="/coordinates_file" value="$(arg coordinates_file_dir)" type="string" />
 	<param name="/collect_button_num" value="$(arg collect_button_num)" type="int" />

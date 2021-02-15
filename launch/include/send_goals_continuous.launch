@@ -12,6 +12,6 @@
 	<param name="/coordinates_file" value="/waypoint_files/points_outdoor.txt" type="string" />		
   <param name="/goalTolerance" value="$(arg goal_Tolerance)" type="double" />
   
-  <node ns="" pkg="outdoor_waypoint_nav" type="switch_controllers" name="switch_controllers" output="screen" />
+  <node  pkg="outdoor_waypoint_nav" type="switch_controllers" name="switch_controllers" output="screen" />
 
 </launch>
