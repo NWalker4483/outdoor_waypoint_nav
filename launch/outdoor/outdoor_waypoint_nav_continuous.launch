@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+   <!-- Run husky_navigation to enable move_base -->
+   <include file="$(find husky_navigation)/launch/move_base_nav_continuous.launch" />
+
+   <!-- launch safety node to allow the user to disable velocity commands to the robot -->
+   <include file="$(find outdoor_waypoint_nav)/launch/include/safety_node.launch" />
+</launch>
