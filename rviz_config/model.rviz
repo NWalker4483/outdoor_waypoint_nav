@@ -225,7 +225,7 @@ Visualization Manager:
       Length: 0.5
       Name: GPS Odom
       Position Tolerance: 0.1
-      Topic: /outdoor_waypoint_nav/odometry/gps
+      Topic: /odometry/gps
       Value: true
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
@@ -235,7 +235,7 @@ Visualization Manager:
       Length: 0.5
       Name: EKF Filtered Odom
       Position Tolerance: 0.1
-      Topic: /outdoor_waypoint_nav/odometry/filtered_map
+      Topic: /odometry/filtered_map
       Value: true
     - Alpha: 0.7
       Class: rviz/Map
@@ -243,7 +243,7 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map - Gmapping
-      Topic: /outdoor_waypoint_nav/map
+      Topic: /map
       Unreliable: false
       Value: true
     - Alpha: 1

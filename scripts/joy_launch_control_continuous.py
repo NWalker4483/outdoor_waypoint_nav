@@ -42,18 +42,18 @@ def getParameter():
     global continue_btn_sym
     global sim_enabled
 
-    collect_btn_num = rospy.get_param("/outdoor_waypoint_nav/collect_button_num")
-    collect_btn_sym = rospy.get_param("/outdoor_waypoint_nav/collect_button_sym")
-    send_btn_num = rospy.get_param("/outdoor_waypoint_nav/send_button_num")
-    send_btn_sym = rospy.get_param("/outdoor_waypoint_nav/send_button_sym")
-    calibrate_btn_num = rospy.get_param("/outdoor_waypoint_nav/calibrate_button_num")
-    calibrate_btn_sym = rospy.get_param("/outdoor_waypoint_nav/calibrate_button_sym")
-    abort_btn_num = rospy.get_param("/outdoor_waypoint_nav/abort_button_num")
-    abort_btn_sym = rospy.get_param("/outdoor_waypoint_nav/abort_button_sym")
-    continue_btn_num = rospy.get_param("/outdoor_waypoint_nav/continue_button_num")
-    continue_btn_sym = rospy.get_param("/outdoor_waypoint_nav/continue_button_sym")
+    collect_btn_num = rospy.get_param("/collect_button_num")
+    collect_btn_sym = rospy.get_param("/collect_button_sym")
+    send_btn_num = rospy.get_param("/send_button_num")
+    send_btn_sym = rospy.get_param("/send_button_sym")
+    calibrate_btn_num = rospy.get_param("/calibrate_button_num")
+    calibrate_btn_sym = rospy.get_param("/calibrate_button_sym")
+    abort_btn_num = rospy.get_param("/abort_button_num")
+    abort_btn_sym = rospy.get_param("/abort_button_sym")
+    continue_btn_num = rospy.get_param("/continue_button_num")
+    continue_btn_sym = rospy.get_param("/continue_button_sym")
     
-    sim_enabled = rospy.get_param("/outdoor_waypoint_nav/sim_enabled")
+    sim_enabled = rospy.get_param("/sim_enabled")
 
 def getPaths():
     global location_collect
@@ -98,9 +98,9 @@ def waypoint_following_status_CB(waypoint_following_status_msg):
 def launch_subscribers():
     rospy.init_node('joy_launch_control')
     rospy.Subscriber("/joy_teleop/joy",Joy, joy_CB )
-    rospy.Subscriber("/outdoor_waypoint_nav/calibrate_status",Bool, calibrate_status_CB )
-    rospy.Subscriber("/outdoor_waypoint_nav/collection_status",Bool, collection_status_CB )
-    rospy.Subscriber("/outdoor_waypoint_nav/waypoint_following_status",Bool, waypoint_following_status_CB )
+    rospy.Subscriber("/calibrate_status",Bool, calibrate_status_CB )
+    rospy.Subscriber("/collection_status",Bool, collection_status_CB )
+    rospy.Subscriber("/waypoint_following_status",Bool, waypoint_following_status_CB )
 
 def print_instructions():
 
