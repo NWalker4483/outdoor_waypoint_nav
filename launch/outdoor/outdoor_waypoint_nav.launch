@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-
-<launch>
-   <!-- Launch robot_localization and navsat -->
-   <include file="$(find outdoor_waypoint_nav)/launch/include/localization_run.launch" />
-
-   <!-- launch safety node to allow the user to disable velocity commands to the robot -->
-   <include file="$(find outdoor_waypoint_nav)/launch/include/safety_node.launch" />
-</launch>

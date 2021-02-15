@@ -11,16 +11,13 @@
 #include <tf/transform_listener.h>
 #include <math.h>
 
-
-
-
 // initialize variables
 
-typedef actionlib::SimpleActionClient <move_base_msgs::MoveBaseAction>
-MoveBaseClient; //create a type definition for a client called MoveBaseClient
+typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>
+    MoveBaseClient; //create a type definition for a client called MoveBaseClient
 
-std::vector <std::pair<double, double>> waypointVect;
-std::vector<std::pair < double, double> > ::iterator iter; //init. iterator
+std::vector<std::pair<double, double>> waypointVect;
+std::vector<std::pair<double, double>>::iterator iter; //init. iterator
 geometry_msgs::PointStamped UTM_point, map_point, UTM_next, map_next;
 int count = 0, waypointCount = 0, wait_count = 0;
 double numWaypoints = 0;
@@ -28,15 +25,14 @@ double latiGoal, longiGoal, latiNext, longiNext;
 std::string utm_zone;
 std::string path_local, path_abs;
 
-
 int countWaypointsInFile(std::string path_local)
 {
     path_abs = ros::package::getPath("outdoor_waypoint_nav") + path_local;
     std::ifstream fileCount(path_abs.c_str());
-    if(fileCount.is_open())
+    if (fileCount.is_open())
     {
         double lati = 0;
-        while(!fileCount.eof())
+        while (!fileCount.eof())
         {
             fileCount >> lati;
             ++count;
@@ -54,13 +50,13 @@ int countWaypointsInFile(std::string path_local)
     return numWaypoints;
 }
 
-std::vector <std::pair<double, double>> getWaypoints(std::string path_local)
+std::vector<std::pair<double, double>> getWaypoints(std::string path_local)
 {
     double lati = 0, longi = 0;
 
     path_abs = ros::package::getPath("outdoor_waypoint_nav") + path_local;
     std::ifstream fileRead(path_abs.c_str());
-    for(int i = 0; i < numWaypoints; i++)
+    for (int i = 0; i < numWaypoints; i++)
     {
         fileRead >> lati;
         fileRead >> longi;
@@ -70,8 +66,8 @@ std::vector <std::pair<double, double>> getWaypoints(std::string path_local)
 
     //Outputting vector
     ROS_INFO("The following GPS Waypoints have been set:");
-    for(std::vector < std::pair < double, double >> ::iterator iterDisp = waypointVect.begin(); iterDisp != waypointVect.end();
-    iterDisp++)
+    for (std::vector<std::pair<double, double>>::iterator iterDisp = waypointVect.begin(); iterDisp != waypointVect.end();
+         iterDisp++)
     {
         ROS_INFO("%.9g %.9g", iterDisp->first, iterDisp->second);
     }
@@ -102,7 +98,7 @@ geometry_msgs::PointStamped UTMtoMapPoint(geometry_msgs::PointStamped UTM_input)
     bool notDone = true;
     tf::TransformListener listener; //create transformlistener object called listener
     ros::Time time_now = ros::Time::now();
-    while(notDone)
+    while (notDone)
     {
         try
         {
@@ -111,7 +107,7 @@ geometry_msgs::PointStamped UTMtoMapPoint(geometry_msgs::PointStamped UTM_input)
             listener.transformPoint("odom", UTM_input, map_point_output);
             notDone = false;
         }
-        catch (tf::TransformException& ex)
+        catch (tf::TransformException &ex)
         {
             ROS_WARN("%s", ex.what());
             ros::Duration(0.01).sleep();
@@ -134,14 +130,14 @@ move_base_msgs::MoveBaseGoal buildGoal(geometry_msgs::PointStamped map_point, ge
     goal.target_pose.pose.position.y = map_point.point.y; //specify y goal
 
     // Specify heading goal using current goal and next goal (point robot towards its next goal once it has achieved its current goal)
-    if(last_point == false)
+    if (last_point == false)
     {
         tf::Matrix3x3 rot_euler;
         tf::Quaternion rot_quat;
 
         // Calculate quaternion
         float x_curr = map_point.point.x, y_curr = map_point.point.y; // set current coords.
-        float x_next = map_next.point.x, y_next = map_next.point.y; // set coords. of next waypoint
+        float x_next = map_next.point.x, y_next = map_next.point.y;   // set coords. of next waypoint
         float delta_x = x_next - x_curr, delta_y = y_next - y_curr;   // change in coords.
         float yaw_curr = 0, pitch_curr = 0, roll_curr = 0;
         yaw_curr = atan2(delta_y, delta_x);
@@ -163,7 +159,7 @@ move_base_msgs::MoveBaseGoal buildGoal(geometry_msgs::PointStamped map_point, ge
     return goal;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     ros::init(argc, argv, "gps_waypoint"); //initiate node called gps_waypoint
     ros::NodeHandle n;
@@ -176,10 +172,10 @@ int main(int argc, char** argv)
     ros::Publisher pubWaypointNodeEnded = n.advertise<std_msgs::Bool>("/waypoint_following_status", 100);
 
     //wait for the action server to come up
-    while(!ac.waitForServer(ros::Duration(5.0)))
+    while (!ac.waitForServer(ros::Duration(5.0)))
     {
         wait_count++;
-        if(wait_count > 3)
+        if (wait_count > 3)
         {
             ROS_ERROR("move_base action server did not come up, killing gps_waypoint node...");
             // Notify joy_launch_control that waypoint following is complete
@@ -200,9 +196,8 @@ int main(int argc, char** argv)
     //Reading waypoints from text file and output results
     waypointVect = getWaypoints(path_local);
 
-
     // Iterate through vector of waypoints for setting goals
-    for(iter = waypointVect.begin(); iter < waypointVect.end(); iter++)
+    for (iter = waypointVect.begin(); iter < waypointVect.end(); iter++)
     {
         //Setting goal:
         latiGoal = iter->first;
@@ -210,7 +205,7 @@ int main(int argc, char** argv)
         bool final_point = false;
 
         //set next goal point if not at last waypoint
-        if(iter < (waypointVect.end() - 1))
+        if (iter < (waypointVect.end() - 1))
         {
             iter++;
             latiNext = iter->first;
@@ -245,7 +240,7 @@ int main(int argc, char** argv)
         //Wait for result
         ac.waitForResult(); //waiting to see if move_base was able to reach goal
 
-        if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+        if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
         {
             ROS_INFO("Husky has reached its goal!");
             //switch to next waypoint and repeat
