@@ -32,6 +32,5 @@
 	<param name="/abort_button_sym" value="$(arg abort_button_sym)" type="string" />
 	<param name="/continue_button_num" value="$(arg continue_button_num)" type="int" />
 	<param name="/continue_button_sym" value="$(arg continue_button_sym)" type="string" />
-	<param name="/sim_enabled" value="$(arg simulation_enabled)" type="bool" />
 
 </launch>
