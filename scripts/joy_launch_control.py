@@ -58,21 +58,11 @@ def getPaths():
     global location_safety_node
     rospack = rospkg.RosPack()
     
-    # Define location of launch files
-    if sim_enabled == True:
-        location_collect = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/collect_goals_sim.launch"
-        location_send = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/send_goals_sim.launch"
-        location_calibrate = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/heading_calibration_sim.launch"
-        location_safety_node = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/safety_node.launch"
+    location_collect = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/collect_goals.launch"
+    location_send = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/send_goals.launch"
+    location_calibrate = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/heading_calibration.launch"
+    location_safety_node = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/safety_node.launch"
 
-    elif sim_enabled == False:
-        location_collect = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/collect_goals.launch"
-        location_send = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/send_goals.launch"
-        location_calibrate = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/heading_calibration.launch"
-        location_safety_node = rospack.get_path('outdoor_waypoint_nav') + "/launch/include/safety_node.launch"
-
-    else:
-        print("ERROR: PLEASE SPECIFY SIM_ENABLED PARAMETER.")
 
 def joy_CB(joy_msg):
     global start_collect_btn
@@ -194,9 +184,8 @@ if __name__ == '__main__':
     launch = roslaunch.parent.ROSLaunchParent(uuid,[location_collect])
     print_instructions()
 
-    if sim_enabled == False:
-        print("NOTE: It is recommended to perform one or two heading calibrations")
-        print("      each time the robot is starting from a new heading.")
+    print("NOTE: It is recommended to perform one or two heading calibrations")
+    print("      each time the robot is starting from a new heading.")
     
     main()
     

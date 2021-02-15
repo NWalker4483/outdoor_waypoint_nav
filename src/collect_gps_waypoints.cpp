@@ -10,8 +10,6 @@
 #include <ros/time.h>
 #include <math.h>
 
-
-
 bool collect_request;
 bool continue_collection = true;
 double lati_point=0, longi_point=0, lati_last=0, longi_last=0;
