@@ -65,7 +65,6 @@ def getPaths():
 
 
 def joy_CB(joy_msg):
-    global start_collect_btn
     global buttons_array 
     buttons_array = [joy_msg.buttons[collect_btn_num],joy_msg.buttons[send_btn_num],joy_msg.buttons[calibrate_btn_num], joy_msg.buttons[abort_btn_num], joy_msg.buttons[continue_btn_num]]
 
