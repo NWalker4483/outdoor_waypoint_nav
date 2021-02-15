@@ -18,8 +18,6 @@
 	<arg name="continue_button_num" value="3" />
 	<arg name="continue_button_sym" value="Y" />
 
-	<arg name="simulation_enabled" value="false" />
-
 	<!-- Run collect_gps_waypoints node -->
 	<node  pkg="outdoor_waypoint_nav" type="joy_launch_control_continuous.py" name="joy_launch_control" output="screen" />
 	<param name="/collect_button_num" value="$(arg collect_button_num)" type="int" />

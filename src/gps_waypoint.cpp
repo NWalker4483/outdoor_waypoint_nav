@@ -161,7 +161,7 @@ move_base_msgs::MoveBaseGoal buildGoal(geometry_msgs::PointStamped map_point, ge
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "gps_waypoint"); //initiate node called gps_waypoint
+    ros::init(argc, argv, "gps_waypoint"); // initiate node called gps_waypoint
     ros::NodeHandle n;
     ROS_INFO("Initiated gps_waypoint node");
     MoveBaseClient ac("/move_base", true);
