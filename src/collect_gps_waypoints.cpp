@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 
     //Initiate subscribers
 		ros::Subscriber sub_joy = n.subscribe("/joy_teleop/joy", 100, joy_CB);
-		ros::Subscriber sub_gps = n.subscribe("/gps/filtered", 100, filtered_gps_CB);
+		ros::Subscriber sub_gps = n.subscribe("odometry/gps", 100, filtered_gps_CB);
 		ROS_INFO("Initiated collect_gps_waypoints node");
 
 	// Initiate publisher to send end of node message
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
     //Read file path and create/open file
     	ros::param::get("/coordinates_file", path_local);
-		std::string path_abs =  ros::package::getPath("outdoor_waypoint_nav") + path_local;	
+		std::string path_abs = ros::package::getPath("outdoor_waypoint_nav") + path_local;	
 		std::ofstream coordFile (path_abs.c_str());
 		ROS_INFO("Saving coordinates to: %s", path_abs.c_str());
 		

@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 
     // Initialise publishers and subscribers
     ros::Subscriber sub_odom = n.subscribe("/odometry/filtered_map", 100, filtered_odom_CB);
-    ros::Publisher pubVel = n.advertise<geometry_msgs::Twist>("/husky_velocity_controller/cmd_vel",100);
+    ros::Publisher pubVel = n.advertise<geometry_msgs::Twist>("/cmd_vel",100);
     ros::Publisher pubCalibrationNodeEnded = n.advertise<std_msgs::Bool>("/calibrate_status",100);
 
     // Get parameters from parameer server
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
     ROS_INFO("Detected heading error of: %.1f Degrees", 180/M_PI*(heading_error));
 
     //write params file
-    std::string path =  ros::package::getPath("outdoor_waypoint_nav") + "/params/navsat_params.yaml";
+    std::string path = ros::package::getPath("outdoor_waypoint_nav") + "/params/navsat_params.yaml";
     ROS_INFO("Writing calibration results to file...");
     writeParams(path, heading_error);
     ROS_INFO("Wrote to param file: ");

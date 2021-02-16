@@ -67,8 +67,8 @@ int main(int argc, char **argv)
 	ros::Rate rate1(1);
 
 	//Subscribe to topics
-	ros::Subscriber sub_gps_raw = n.subscribe("/navsat/fix", 100, raw_gps_CB);
-	ros::Subscriber sub_gps_filtered = n.subscribe("/gps/filtered", 100, filtered_gps_CB);
+	ros::Subscriber sub_gps_raw = n.subscribe("/phone/fix", 100, raw_gps_CB);
+	ros::Subscriber sub_gps_filtered = n.subscribe("odometry/gps", 100, filtered_gps_CB);
 	ros::Subscriber sub_joy = n.subscribe("/joy_teleop/joy", 100, joy_CB);
 
 	// Read file path and create/open file
