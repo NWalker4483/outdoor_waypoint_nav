@@ -171,7 +171,7 @@ int main(int argc, char** argv)
     //Setting true is telling the constructor to start ros::spin()
 
     // Initiate publisher to send end of node message and collect scan request
-    ros::Publisher pubWaypointNodeEnded = n.advertise<std_msgs::Bool>("outdoor_waypoint_nav/waypoint_following_status", 100);
+    ros::Publisher pubWaypointNodeEnded = n.advertise<std_msgs::Bool>("/waypoint_following_status", 100);
     ros::Publisher pubScanRequest = n.advertise<std_msgs::Bool>("/m3d_test/aggregator/request", 1000);
 
     //wait for the action server to come up
